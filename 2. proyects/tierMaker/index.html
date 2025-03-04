@@ -19,18 +19,23 @@
             box-sizing: border-box;
         }
 
+        body {
+            background: #111;
+            color: #fff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            user-select: none; 
+            margin: 0 auto;
+            max-width: 500px;
+            padding-inline: 32px;
+            user-select: none;
+            /* bad practice */
+        }
+
         button {
             background-color: transparent;
             border: 0;
             color: #fff;
             cursor: pointer;
-        }
-
-        body {
-            background-color: #111;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            user-select: none; 
-            /* bad practice */
         }
 
         #top-header {
@@ -42,12 +47,45 @@
             & img {
                 max-width: 150px;
                 height: auto;
-                padding-inline: 32px;
+                /* padding-inline: 32px; */
                 /* is the same */
                 /* padding-right: 32px;
                 padding-left: 32px; */
             }
         }
+
+        .tier {
+            border: 1px solid #444;
+            display: flex;
+            flex-direction: column;
+            background: #1f1f1f;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            border-bottom: 1px solid #111;
+        }
+
+        .label {
+            cursor: pointer;
+            
+            background: var(--level, #09f);
+            /* la variable level se define aqui mismo */
+            color: #333;
+            font-weight: bold;
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            & span:focus {
+                outline: 1px solid #fff;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -56,7 +94,37 @@
             <img src="https://tiermaker.com/images/tiermaker-logo.png" alt="tiermaker-logo">
         </header>
 
-        
+        <section class="tier">
+            <div class="row">
+                <aside class="label" style="--level: var(--color-s)">
+                    <span contenteditable="true">A</span>
+                </aside>
+            </div>
+
+            <div class="row">
+                <aside class="label" style="--level: var(--color-a)">
+                    <span contenteditable="true">B</span>
+                </aside>
+            </div>
+
+            <div class="row">
+                <aside class="label" style="--level: var(--color-b)">
+                    <span contenteditable="true">C</span>
+                </aside>
+            </div>
+
+            <div class="row">
+                <aside class="label" style="--level: var(--color-d)">
+                    <span contenteditable="true">D</span>
+                </aside>
+            </div>
+
+            <div class="row">
+                <aside class="label" style="--level: var(--color-e)">
+                    <span contenteditable="true">E</span>
+                </aside>
+            </div>
+        </section>
     </main>
 </body>
 </html>
