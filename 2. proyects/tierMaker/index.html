@@ -303,9 +303,9 @@
                         const imgURL = canvas.toDataURL('image/png');
 
                         const downloadLink = document.createElement('a');
-                        downloadLink.download = 'tier.png'; // Set the file name
-                        downloadLink.href = imgURL; // Set the URL to the image
-                        downloadLink.click(); // Trigger the download
+                        downloadLink.download = 'tier.png';
+                        downloadLink.href = imgURL;
+                        downloadLink.click();
                     }).catch(error => {
                         console.error('Error generating screenshot:', error);
                     });
