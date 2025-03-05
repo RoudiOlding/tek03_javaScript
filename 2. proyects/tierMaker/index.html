@@ -130,10 +130,42 @@
             margin-bottom: 100px;
             display: flex;
         }
+
+        .item-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            background: #fff;
+            cursor: grab;
+        }
     </style>
 
     <script type="module">
+        const $ = el => document.querySelector(el)
+        const $$ = el => document.querySelectorAll(el)
 
+        const imageInput = $('#image-input')
+        const itemsSection = $('#selector-items')
+
+        imageInput.addEventListener('change', (event) => {
+        const [file] = event.target.files
+
+            if (file) {
+                const reader = new FileReader()
+
+                reader.onload = (eventReader) => {
+                    console.log(eventReader.target.result)
+
+                    const imgElement = document.createElement('img')
+                    imgElement.draggable = true
+                    imgElement.src = eventReader.target.result
+                    imgElement.className = 'item-image'
+                    itemsSection.appendChild(imgElement)
+                }
+
+                reader.readAsDataURL(file)
+            }
+        })
     </script>
 </head>
 
@@ -185,7 +217,7 @@
                         <path d="M9 12h6"></path>
                         <path d="M12 9v6"></path>
                     </svg>
-                    <input id="image-input" type="file" hidden>
+                    <input accept="image/*" id="image-input" type="file" hidden>
                 </label>
 
 
