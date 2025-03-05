@@ -29,7 +29,6 @@
             max-width: 500px;
             padding-inline: 32px;
             user-select: none;
-            /* bad practice */
         }
 
         button {
@@ -48,10 +47,6 @@
             & img {
                 max-width: 150px;
                 height: auto;
-                /* padding-inline: 32px; */
-                /* is the same */
-                /* padding-right: 32px;
-                padding-left: 32px; */
             }
         }
 
@@ -70,20 +65,17 @@
 
             &.drag-over {
                 background: #555;
-                scale: 1.01;    
+                scale: 1.01;
             }
         }
 
         .label {
             cursor: pointer;
-
             background: var(--level, #09f);
-            /* la variable level se define aqui mismo */
             color: #333;
             font-weight: bold;
             width: 50px;
             height: 50px;
-
             display: flex;
             align-items: center;
             justify-content: center;
@@ -106,16 +98,18 @@
             gap: 8px;
             justify-content: center;
 
-            & button, & label {
+            & button,
+            & label {
                 cursor: pointer;
                 transition: all .3s ease;
                 background: #222;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 30px;
-                height: 24px;
-                padding: 4px;
+                width: 40px; /* Consistent size */
+                height: 40px; /* Consistent size */
+                padding: 8px; /* Consistent padding */
+                border-radius: 4px; /* Optional: Rounded corners */
 
                 &:hover {
                     background: #444;
@@ -124,8 +118,8 @@
             }
 
             & svg {
-                width: 100%;
-                height: 100%;
+                width: 24px; /* Consistent SVG size */
+                height: 24px; /* Consistent SVG size */
             }
         }
 
@@ -135,6 +129,12 @@
             height: 100px;
             margin-bottom: 100px;
             display: flex;
+            flex-wrap: wrap;
+
+            &.drag-files {
+                background: #555;
+                border-style: dashed;
+            }
         }
 
         .item-image {
@@ -145,118 +145,154 @@
             cursor: grab;
 
             &.drag-preview {
-                opacity: 5;
+                opacity: 0.5;
                 pointer-events: none;
             }
         }
     </style>
 
     <script type="module">
-        const $ = el => document.querySelector(el)
-        const $$ = el => document.querySelectorAll(el)
+        const $ = el => document.querySelector(el);
+        const $$ = el => document.querySelectorAll(el);
 
-        const imageInput = $('#image-input')
-        const itemsSection = $('#selector-items')
+        const imageInput = $('#image-input');
+        const itemsSection = $('#selector-items');
+        const resetButton = $('#reset-tier-button');
 
         function createItem(src) {
-            const imgElement = document.createElement('img')
-            imgElement.draggable = true
-            imgElement.src = src
-            imgElement.className = 'item-image'
+            const imgElement = document.createElement('img');
+            imgElement.draggable = true;
+            imgElement.src = src;
+            imgElement.className = 'item-image';
 
-            imgElement.addEventListener('dragstart', handleDragStart)
-            imgElement.addEventListener('dragend', handleDragEnd)
+            imgElement.addEventListener('dragstart', handleDragStart);
+            imgElement.addEventListener('dragend', handleDragEnd);
 
-            itemsSection.appendChild(imgElement)
-            return imgElement
+            itemsSection.appendChild(imgElement);
+            return imgElement;
+        }
+
+        function useFilesToCreateItems(files) {
+            if (files && files.length > 0) {
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+
+                    reader.onload = (eventReader) => {
+                        createItem(eventReader.target.result);
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+            }
         }
 
         imageInput.addEventListener('change', (event) => {
-            const { files } = event.target
+            const { files } = event.target;
+            useFilesToCreateItems(files)
+        });
 
-            if (files && files.length > 0) {
-                Array.from(files).forEach(file => {
-                    const reader = new FileReader()
+        let draggedElement = null;
+        let sourceContainer = null;
 
-                    reader.onload = (eventReader) => {
-                        createItem(eventReader.target.result)
-                    }
-
-                    reader.readAsDataURL(file)
-                })
-                
-            }
-        })
-
-        let draggedElement = null
-        let sourceContainer = null
-
-        const rows = $$('.tier .row')
+        const rows = $$('.tier .row');
 
         rows.forEach(row => {
-            row.addEventListener('dragover', handleDragOver)
-            row.addEventListener('drop', handleDrop)
-            row.addEventListener('dragleave', handleDragLeave)
-        })
+            row.addEventListener('dragover', handleDragOver);
+            row.addEventListener('drop', handleDrop);
+            row.addEventListener('dragleave', handleDragLeave);
+        });
 
-        itemsSection.addEventListener('dragover', handleDragOver)
-        itemsSection.addEventListener('drop', handleDrop)
-        itemsSection.addEventListener('dragleave', handleDragLeave)
+        itemsSection.addEventListener('dragover', handleDragOver);
+        itemsSection.addEventListener('drop', handleDrop);
+        itemsSection.addEventListener('dragleave', handleDragLeave);
 
-        function handleDrop(event) {
+        itemsSection.addEventListener('drop', handleDropFromDesktop);
+        itemsSection.addEventListener('dragover', handleDragOverFromDesktop);
+
+        function handleDragOverFromDesktop(event){
             event.preventDefault()
 
             const { currentTarget, dataTransfer } = event
 
-            if (sourceContainer && draggedElement ) {
-                sourceContainer.removeChild(draggedElement)
+            if (dataTransfer.types.includes('Files')){
+                currentTarget.classList.add('drag-files')
+
+            }
+        }
+
+        function handleDropFromDesktop(event){
+            event.preventDefault()
+
+            const { currentTarget, dataTransfer } = event
+
+            if (dataTransfer.types.includes('Files')){
+                currentTarget.classList.remove('drag-files')
+                const { files } = dataTransfer
+                useFilesToCreateItems(files)
+            }
+        }
+
+        
+
+
+        function handleDrop(event) {
+            event.preventDefault();
+
+            const { currentTarget } = event;
+
+            if (sourceContainer && draggedElement) {
+                sourceContainer.removeChild(draggedElement);
+                currentTarget.appendChild(draggedElement);
             }
 
-            if (draggedElement) {
-                const src = dataTransfer.getData('text/plain')
-                const imgElement = createItem(src)
-                currentTarget.appendChild(imgElement)
-            }
-
-            currentTarget.classList.remove('drag-over')
-            currentTarget.querySelector('. drag-preview')?.remove()
+            currentTarget.classList.remove('drag-over');
+            currentTarget.querySelector('.drag-preview')?.remove();
         }
 
         function handleDragOver(event) {
-            event.preventDefault()
+            event.preventDefault();
 
-            const { currentTarget } = event
-            if (sourceContainer == currentTarget) return
+            const { currentTarget } = event;
+            if (sourceContainer == currentTarget) return;
 
             currentTarget.classList.add('drag-over');
 
-            const dragPreview = $('.drag-preview')
+            const dragPreview = $('.drag-preview');
 
             if (draggedElement && !dragPreview) {
-                const previewElement = draggedElement.cloneNode(true)
-                previewElement.classList.add('drag-preview')
-                currentTarget.appendChild(previewElement)
+                const previewElement = draggedElement.cloneNode(true);
+                previewElement.classList.add('drag-preview');
+                currentTarget.appendChild(previewElement);
             }
         }
 
         function handleDragLeave(event) {
-            event.preventDefault()
+            event.preventDefault();
 
-            const { currentTarget } = event
-            currentTarget.classList.remove('drag-over')
-            currentTarget.querySelector('. drag-preview')?.remove()
+            const { currentTarget } = event;
+            currentTarget.classList.remove('drag-over');
+            currentTarget.querySelector('.drag-preview')?.remove();
         }
 
         function handleDragStart(event) {
-            draggedElement = event.target
-            sourceContainer = draggedElement.parentNode
-            event.dataTransfer.setData('text/plain', draggedElement.src)
+            draggedElement = event.target;
+            sourceContainer = draggedElement.parentNode;
+            event.dataTransfer.setData('text/plain', draggedElement.src);
         }
 
         function handleDragEnd(event) {
-            draggedElement = null
-            sourceContainer = null
+            draggedElement = null;
+            sourceContainer = null;
         }
+
+        resetButton.addEventListener('click', () => {
+            const items = $$('.tier .item-image')
+            items.forEach(item => {
+                item.remove()
+                itemsSection.appendChild(item)
+            })
+        })
+
     </script>
 </head>
 
@@ -299,7 +335,6 @@
         </section>
 
         <footer id="selector">
-
             <section id="selector-buttons">
                 <label>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -308,23 +343,18 @@
                         <path d="M9 12h6"></path>
                         <path d="M12 9v6"></path>
                     </svg>
-                    <input multiple ="image/*" id="image-input" type="file" hidden>
+                    <input multiple="image/*" id="image-input" type="file" hidden>
                 </label>
 
-
-                <label>
+                <button id="reset-tier-button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="0.75">
                         <path d="M4.05 11a8 8 0 1 1 .5 4m-.5 5v-5h5"></path>
                     </svg>
-                </label>
-
+                </button>
             </section>
 
-            <section id="selector-items">
-
-            </section>
-
+            <section id="selector-items"></section>
         </footer>
     </main>
 </body>
