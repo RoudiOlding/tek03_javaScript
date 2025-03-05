@@ -66,6 +66,12 @@
             display: flex;
             flex-direction: row;
             border-bottom: 1px solid #111;
+            transition: all .3s ease;
+
+            &.drag-over {
+                background: #555;
+                scale: 1.01;    
+            }
         }
 
         .label {
@@ -147,25 +153,94 @@
         const imageInput = $('#image-input')
         const itemsSection = $('#selector-items')
 
+        function createItem(src) {
+            const imgElement = document.createElement('img')
+            imgElement.draggable = true
+            imgElement.src = src
+            imgElement.className = 'item-image'
+
+            imgElement.addEventListener('dragstart', handleDragStart)
+            imgElement.addEventListener('dragend', handleDragEnd)
+
+            itemsSection.appendChild(imgElement)
+            return imgElement
+        }
+
         imageInput.addEventListener('change', (event) => {
-        const [file] = event.target.files
+            const [file] = event.target.files
 
             if (file) {
                 const reader = new FileReader()
 
                 reader.onload = (eventReader) => {
-                    console.log(eventReader.target.result)
-
-                    const imgElement = document.createElement('img')
-                    imgElement.draggable = true
-                    imgElement.src = eventReader.target.result
-                    imgElement.className = 'item-image'
-                    itemsSection.appendChild(imgElement)
+                    createItem(eventReader.target.result)
                 }
 
                 reader.readAsDataURL(file)
             }
         })
+
+        let draggedElement = null
+        let sourceContainer = null
+
+        const rows = $$('.tier .row')
+
+        rows.forEach(row => {
+            row.addEventListener('dragover', handleDragOver)
+            row.addEventListener('drop', handleDrop)
+            row.addEventListener('dragleave', handleDragLeave)
+        })
+
+        itemsSection.addEventListener('dragover', handleDragOver)
+        itemsSection.addEventListener('drop', handleDrop)
+        itemsSection.addEventListener('dragleave', handleDragLeave)
+
+        function handleDrop(event) {
+            event.preventDefault()
+
+            const { currentTarget, dataTransfer } = event
+
+            if (sourceContainer && draggedElement ) {
+                sourceContainer.removeChild(draggedElement)
+            }
+
+            if (draggedElement) {
+                const src = dataTransfer.getData('text/plain')
+                const imgElement = createItem(src)
+                currentTarget.appendChild(imgElement)
+            }
+
+            currentTarget.classList.remove('drag-over')
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault()
+
+            const { currentTarget } = event
+            if (sourceContainer == currentTarget) return
+
+            currentTarget.classList.add('drag-over');
+            console.log('drag over')
+        }
+
+        function handleDragLeave(event) {
+            event.preventDefault()
+
+            const { currentTarget } = event
+
+            currentTarget.classList.remove('drag-over')
+        }
+
+        function handleDragStart(event) {
+            draggedElement = event.target
+            sourceContainer = draggedElement.parentNode
+            event.dataTransfer.setData('text/plain', draggedElement.src)
+        }
+
+        function handleDragEnd(event) {
+            draggedElement = null
+            sourceContainer = null
+        }
     </script>
 </head>
 
