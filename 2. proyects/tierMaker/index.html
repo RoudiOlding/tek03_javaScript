@@ -143,6 +143,11 @@
             object-fit: cover;
             background: #fff;
             cursor: grab;
+
+            &.drag-preview {
+                opacity: 5;
+                pointer-events: none;
+            }
         }
     </style>
 
@@ -167,16 +172,19 @@
         }
 
         imageInput.addEventListener('change', (event) => {
-            const [file] = event.target.files
+            const { files } = event.target
 
-            if (file) {
-                const reader = new FileReader()
+            if (files && files.length > 0) {
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader()
 
-                reader.onload = (eventReader) => {
-                    createItem(eventReader.target.result)
-                }
+                    reader.onload = (eventReader) => {
+                        createItem(eventReader.target.result)
+                    }
 
-                reader.readAsDataURL(file)
+                    reader.readAsDataURL(file)
+                })
+                
             }
         })
 
@@ -211,6 +219,7 @@
             }
 
             currentTarget.classList.remove('drag-over')
+            currentTarget.querySelector('. drag-preview')?.remove()
         }
 
         function handleDragOver(event) {
@@ -220,15 +229,22 @@
             if (sourceContainer == currentTarget) return
 
             currentTarget.classList.add('drag-over');
-            console.log('drag over')
+
+            const dragPreview = $('.drag-preview')
+
+            if (draggedElement && !dragPreview) {
+                const previewElement = draggedElement.cloneNode(true)
+                previewElement.classList.add('drag-preview')
+                currentTarget.appendChild(previewElement)
+            }
         }
 
         function handleDragLeave(event) {
             event.preventDefault()
 
             const { currentTarget } = event
-
             currentTarget.classList.remove('drag-over')
+            currentTarget.querySelector('. drag-preview')?.remove()
         }
 
         function handleDragStart(event) {
@@ -292,7 +308,7 @@
                         <path d="M9 12h6"></path>
                         <path d="M12 9v6"></path>
                     </svg>
-                    <input accept="image/*" id="image-input" type="file" hidden>
+                    <input multiple ="image/*" id="image-input" type="file" hidden>
                 </label>
 
 
