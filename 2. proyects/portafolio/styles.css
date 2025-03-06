@@ -438,6 +438,7 @@ footer ul li a {
 @media(max-width:600px){
     header #menu-icon {
         display: block;
+        cursor: pointer;
     }
     .nav-links {
         position: absolute;
@@ -457,7 +458,7 @@ footer ul li a {
         margin-top: 1.5rem;
         padding: 1rem;
     }
-    .nav-links.activate {
+    .nav-links.active {
         display: block;
     }
 
