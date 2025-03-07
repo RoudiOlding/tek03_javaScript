@@ -19,6 +19,7 @@ function handleModals() {
     const modals = document.querySelectorAll('.modal');
     const closeButtons = document.querySelectorAll('[data-close-modal]');
 
+    // Open modal when a trigger is clicked
     modalTriggers.forEach(trigger => {
         trigger.addEventListener('click', () => {
             const targetModal = document.querySelector(trigger.dataset.modalTarget);
@@ -26,6 +27,7 @@ function handleModals() {
         });
     });
 
+    // Close modal when clicking outside the modal content
     modals.forEach(modal => {
         modal.addEventListener('click', (event) => {
             if (event.target === modal) {
@@ -34,6 +36,7 @@ function handleModals() {
         });
     });
 
+    // Close modal when a close button is clicked
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
             const modal = button.closest('.modal');

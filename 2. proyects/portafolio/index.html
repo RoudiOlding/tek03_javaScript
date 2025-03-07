@@ -41,7 +41,9 @@
 
     <section id="about" class="about">
         <div class="about-container">
-            <img src="makotop3.png" alt="Makoto from Persona 3">
+            <div class="image-wrapper">
+                <img src="makotop3.png" alt="Makoto from Persona 3">
+            </div>
 
             <div class="info-box">
 
@@ -53,23 +55,25 @@
 
                 <div class="btn-group">
                     <div class="btn" id="download-cv">Descargar CV</div>
+                    <!-- Botón para abrir el modal de contacto -->
                     <div class="btn" data-modal-target="#contacto-modal">Datos</div>
                 </div>
 
+                <!-- Modal de contacto -->
                 <div id="contacto-modal" class="modal">
                     <div class="modal-content">
                         <button class="popup-close" data-close-modal>
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                         <h2>Datos</h2>
-                        <p> <strong>Correo: </strong>rdelosrios040504@gmail.com</p>
-                        <p> <strong>Número: </strong>907987440 (+51)</p><br>
+                        <p><strong>Correo: </strong>rdelosrios040504@gmail.com</p>
+                        <p><strong>Número: </strong>907987440 (+51)</p><br>
                         <hr><br>
-                        <p> <strong>Género: </strong>Masculino</p>
-                        <p> <strong>Edad: </strong>21</p>
+                        <p><strong>Género: </strong>Masculino</p>
+                        <p><strong>Edad: </strong>21</p>
                     </div>
                 </div>
-    
+
                 <div class="socials">
                     <a href="https://github.com/RoudiOlding" target="_blank">
                         <i class="fa-brands fa-github"></i>
@@ -93,15 +97,47 @@
                     <i class="fa-solid fa-code"></i>
                     <span>Desarrollador Web</span>
                     <h3>4 meses</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, cum.</p>
+                    <p>
+                        Diseñé 15 páginas en Figma, las desarrolle en Wordpress y le añadí componentes personalizados con HMTL y CSS. Así como optimizar la web a nivel accesibilidad y SEO.
+                    </p><br>
+                    <!-- Botón para abrir el modal de experiencia -->
+                    <div class="btn-exp" data-modal-target="#exp-modal">+</div>
+                
+
                 </div>
                 <div class="grid-card">
                     <i class="fa-solid fa-brain"></i>
                     <span>Profesor de Programación</span>
                     <h3>3 meses</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, cum.</p>
+                    <p>
+                        Capacité a más de 40 alumnos de entre 12 años de edad en programación por bloques en Scratch y Thunkable. Asegurando el éxito de más de 10 proyectos y juegos interactivos.
+                    </p><br>
+                    <div class="btn-exp" data-modal-target="#exp-modal-2">+</div>
                 </div>                
             </div>
+
+            <!-- Modal de experiencia -->
+            <div id="exp-modal" class="modal">
+                <div class="modal-content">
+                    <button class="popup-close" data-close-modal>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <h2>Experiencia 01</h2>
+                    <p>Aquí puedes agregar detalles sobre la experiencia.</p>
+                </div>
+            </div>
+
+            <!-- Modal de experiencia 2 -->
+            <div id="exp-modal-2" class="modal">
+                <div class="modal-content">
+                    <button class="popup-close" data-close-modal>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <h2>Experiencia 02</h2>
+                    <p>Aquí puedes agregar detalles sobre la experiencia.</p>
+                </div>
+            </div>
+
             <img src="makotop3.png" alt="">
         </div>
     </setcion>
