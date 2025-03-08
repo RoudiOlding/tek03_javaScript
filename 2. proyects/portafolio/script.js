@@ -94,18 +94,3 @@ document.addEventListener("DOMContentLoaded", function () {
     updateText();
 });
 
-document.getElementById("toggle-projects").addEventListener("click", function() {
-    const hiddenProjects = document.querySelectorAll(".project-card-hidden-project");
-    const button = document.getElementById("toggle-projects");
-
-    hiddenProjects.forEach(project => {
-        if (project.style.display === "none" || project.style.display === "") {
-            project.style.display = "block";
-        } else {
-            project.style.display = "none";
-        }
-    });
-
-    // Cambiar el texto del botón entre "+" y "-"
-    button.textContent = (button.textContent === "+") ? "-" : "+";
-});
