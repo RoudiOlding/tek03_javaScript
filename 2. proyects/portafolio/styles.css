@@ -678,6 +678,25 @@ a {
     margin-top: 20px;
 }
 
+.project-card-hidden-project {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.2s ease-in-out, height 0.2s ease-in-out;
+}
+
+.project-card-hidden-project.show {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+}
+
+.toggle-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
 #toggle-projects {
     padding: 0.8rem 1.5rem;
     border-radius: 3rem;
@@ -693,18 +712,4 @@ a {
 #toggle-projects:hover {
     background: linear-gradient(to right, rgb(55, 232, 1), rgb(23, 74, 255));
     transform: scale(1.03);
-}
-
-.project-card-hidden-project {
-    visibility: hidden;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-    transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out, visibility 0.5s;
-}
-
-.project-card-hidden-project.show {
-    visibility: visible;
-    opacity: 1;
-    height: auto;
 }
