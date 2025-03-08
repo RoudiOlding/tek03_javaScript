@@ -274,6 +274,7 @@ section {
     justify-content: left;
     cursor: pointer;
     transition: 0.2s ease-in-out;
+    width: 350px;
 }
 
 .grid-card:hover {
