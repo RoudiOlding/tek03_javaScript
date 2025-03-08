@@ -355,6 +355,10 @@ section {
     font-weight: 500;
 }
 
+.project-card a {
+    text-decoration: underline;
+}
+
 .input-box {
     display: flex;
     flex-direction: column;
@@ -625,11 +629,16 @@ a {
     margin-bottom: 0;
 }
 
+.modal-content li {
+    margin-bottom: 10px;
+}
+
 .btn-exp {
     border-radius: 3rem;
     padding: 0.5rem 1.5rem;
     border: 2px solid black;
     background-color: rgb(255, 255, 255);
+    color: black;
     cursor: pointer;
     font-weight: 500;
     text-wrap: nowrap;
@@ -638,4 +647,100 @@ a {
 
 .btn-exp:hover {
     color: rgb(0, 0, 0);
+    transform: scale(1.1);
+}
+
+#typing-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.cursor {
+    margin-left: 0.5rem !important;
+    font-size: 1em !important;
+    color: black !important;
+    margin-left: 5px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.project-card-hidden-project{
+    display: none;
+}
+
+.toggle-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#toggle-projects {
+    padding: 0.8rem 1.5rem;
+    border-radius: 3rem;
+    border: none;
+    font-weight: 500;
+    font-size: 1rem;
+    color:white;
+    cursor: pointer;
+    text-wrap: nowrap;
+    transition: 0.3s ease-in-out;
+    background: linear-gradient(to right, rgb(23, 74, 255), rgb(55, 232, 1));
+}
+
+#toggle-projects:hover {
+    background: linear-gradient(to right, rgb(55, 232, 1), rgb(23, 74, 255));
+    transform: scale(1.03);
+}
+
+.project-card-hidden-project {
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.5rem;
+    border: 2px solid black;
+    border-radius: 3rem;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.project-card-hidden-project:hover {
+    background-color: black;
+    color: white;
+    transition: translateY(-10px)scale(1.02);
+}
+
+.project-card-hidden-project img {
+    width: 15vw;
+    border-radius: 1rem;
+}
+
+.project-card-hidden-project:hover .btn {
+    border: 2px solid white;
+    color: white;
+}
+
+.project-card-hidden-project:hover .btn:hover {
+    border: 2px solid white;
+    background-color: white;
+    color: black;
+}
+
+.project-card-hidden-project h3 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.project-card-hidden-project a {
+    text-decoration: underline;
 }

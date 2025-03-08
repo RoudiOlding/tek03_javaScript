@@ -50,7 +50,10 @@
                 <div class="text">
                     <h3>Hola, soy</h3>
                     <h1>Rodrigo De los Ríos</h1>
-                    <span>Desarrollador Web</span>
+                    <span id="typing-container">
+                        <span id="typing-text"></span>
+                        <span class="cursor"> | </span>
+                    </span>
                 </div>
 
                 <div class="btn-group">
@@ -96,7 +99,7 @@
                 <div class="grid-card">
                     <i class="fa-solid fa-code"></i>
                     <span>Desarrollador Web</span>
-                    <h3>4 meses</h3>
+                    <h3>5 meses</h3>
                     <p>
                         Diseñé 15 páginas en Figma, las desarrolle en Wordpress y le añadí componentes personalizados con HMTL y CSS. Así como optimizar la web a nivel accesibilidad y SEO.
                     </p><br>
@@ -108,7 +111,7 @@
                 <div class="grid-card">
                     <i class="fa-solid fa-brain"></i>
                     <span>Profesor de Programación</span>
-                    <h3>3 meses</h3>
+                    <h3>4 meses</h3>
                     <p>
                         Capacité a más de 40 alumnos de entre 12 años de edad en programación por bloques en Scratch y Thunkable. Asegurando el éxito de más de 10 proyectos y juegos interactivos.
                     </p><br>
@@ -122,8 +125,19 @@
                     <button class="popup-close" data-close-modal>
                         <i class="fa-solid fa-xmark"></i>
                     </button>
-                    <h2>Experiencia 01</h2>
-                    <p>Aquí puedes agregar detalles sobre la experiencia.</p>
+                    <h2>Consigue Ventas</h2>
+                    <span><strong>Desarrollador web & Lider SEO</strong></span><br><br>
+                    <span>Marzo 2024 — Julio 2024</span><br><br>
+                    <hr><br>
+                    <p><strong>Información: </strong>Empresa de consultoría de Marketing digital con 3 años de experiencia que ofrece desarrollo de software y páginas web a los clientes.</p>
+                    <hr><br>
+                    <span><strong>Funciones</strong></span><br><br>
+                    <ul>
+                        <li><strong>Diseñar</strong> y personalizar 15 páginas web en Elementor, optimizando su rendimiento mediante CSS y HTML avanzado.</li>
+                        <li><strong>Implementar</strong> estrategias SEO que permitieron que 3 páginas alcanzaran el top 1 en buscadores de Google.</li>
+                        <li><strong>Optimizar</strong> el rendimiento web, reduciendo el tiempo de carga en un 20% y aumentando el tráfico orgánico en un 15%.</li>
+                        <li><strong>Liderar</strong> el equipo SEO de 6 personas, definiendo las actividades mensuales, las páginas a trabajar y blogs a publicar.</li>
+                    </ul>
                 </div>
             </div>
 
@@ -133,8 +147,18 @@
                     <button class="popup-close" data-close-modal>
                         <i class="fa-solid fa-xmark"></i>
                     </button>
-                    <h2>Experiencia 02</h2>
-                    <p>Aquí puedes agregar detalles sobre la experiencia.</p>
+                    <h2>Tecky Brains</h2>
+                    <span><strong>Profesor de Programación (Voluntariado)</strong></span><br><br>
+                    <span>Noviembre 2023 — Febrero 2024</span><br><br>
+                    <hr><br>
+                    <p><strong>Información: </strong>Institución sin fines de lucro que ofrece talleres de tecnología basados en metodologías STEAM y Design Thinking a niños del Perú.</p>
+                    <hr><br>
+                    <span><strong>Funciones</strong></span><br><br>
+                    <ul>
+                        <li><strong>Capacitar</strong> a 40 estudiantes de entre 11 a 12 años en programación de bloques con Scratch y Thunkable.</li>
+                        <li><strong>Supervisar</strong> 10 proyectos funcionales y juegos interactivos, alcanzado el 100% de objetivos trazados.</li>
+                        <li><strong>Preparar</strong> el material de las clases, así como comunicar a los profesores el estado de la clase y sus avances.</li>
+                    </ul>
                 </div>
             </div>
 
@@ -150,13 +174,14 @@
             <p>2. Hobbies</p>
             <p>3. Blandas</p>
         </div>
+    
     </section>
 
     <section id="projects" class="projects">
         <h2 class="section-title">Proyectos Recientes</h2>
-
+    
         <div class="projects-grid">
-
+            <!-- Proyectos visibles -->
             <div class="project-card">
                 <img src="makotop3.png" alt="Makoto from Persona 3">
                 <h3>Proyect X</h3>
@@ -165,8 +190,9 @@
                     <div class="btn">Demostración</div>
                     <div class="btn">Github Repo</div>
                 </div>
+                <a data-modal-target="#proyect-modal-1">Más información</a>
             </div>
-
+    
             <div class="project-card">
                 <img src="makotop3.png" alt="Makoto from Persona 3">
                 <h3>Proyect Y</h3>
@@ -175,8 +201,9 @@
                     <div class="btn">Demostración</div>
                     <div class="btn">Github Repo</div>
                 </div>
+                <a data-modal-target="#proyect-modal-2">Más información</a>
             </div>
-
+    
             <div class="project-card">
                 <img src="makotop3.png" alt="Makoto from Persona 3">
                 <h3>Proyect Z</h3>
@@ -185,7 +212,36 @@
                     <div class="btn">Demostración</div>
                     <div class="btn">Github Repo</div>
                 </div>
+                <a data-modal-target="#proyect-modal-3">Más información</a>
             </div>
+    
+            <!-- Proyectos ocultos -->
+            <div class="project-card-hidden-project">
+                <img src="makotop3.png" alt="Makoto from Persona 3">
+                <h3>Proyect A</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At, quam.</p>
+                <div class="btn-group">
+                    <div class="btn">Demostración</div>
+                    <div class="btn">Github Repo</div>
+                </div>
+                <a data-modal-target="#proyect-modal-4">Más información</a>
+            </div>
+    
+            <div class="project-card-hidden-project">
+                <img src="makotop3.png" alt="Makoto from Persona 3">
+                <h3>Proyect B</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At, quam.</p>
+                <div class="btn-group">
+                    <div class="btn">Demostración</div>
+                    <div class="btn">Github Repo</div>
+                </div>
+                <a data-modal-target="#proyect-modal-5">Más información</a>
+            </div>
+        </div>
+    
+        <!-- Botón para mostrar/ocultar proyectos -->
+        <div class="toggle-container">
+            <button id="toggle-projects" class="btn">+</button>
         </div>
     </section>
 
