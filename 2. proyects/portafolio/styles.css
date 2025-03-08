@@ -314,7 +314,7 @@ section {
     gap: 2rem;
 }
 
-.project-card {
+.project-card, .project-card-hidden-project {
     padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
@@ -328,34 +328,34 @@ section {
     transition: 0.3s ease-in-out;
 }
 
-.project-card:hover {
+.project-card:hover, .project-card-hidden-project:hover {
     background-color: black;
     color: white;
     transition: translateY(-10px)scale(1.02);
 }
 
-.project-card img {
+.project-card img, .project-card-hidden-project img {
     width: 15vw;
     border-radius: 1rem;
 }
 
-.project-card:hover .btn {
+.project-card:hover .btn, .project-card-hidden-project:hover .btn {
     border: 2px solid white;
     color: white;
 }
 
-.project-card:hover .btn:hover {
+.project-card:hover .btn:hover, .project-card-hidden-project:hover .btn:hover {
     border: 2px solid white;
     background-color: white;
     color: black;
 }
 
-.project-card h3 {
+.project-card h3, .project-card-hidden-project h3 {
     font-size: 2rem;
     font-weight: 500;
 }
 
-.project-card a {
+.project-card a, .project-card-hidden-project a {
     text-decoration: underline;
 }
 
@@ -671,4 +671,40 @@ a {
 
 @keyframes blink {
     50% { opacity: 0; }
+}
+
+.toggle-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#toggle-projects {
+    padding: 0.8rem 1.5rem;
+    border-radius: 3rem;
+    border: none;
+    font-weight: 500;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(to right, rgb(23, 74, 255), rgb(55, 232, 1));
+    transition: 0.3s ease-in-out;
+}
+
+#toggle-projects:hover {
+    background: linear-gradient(to right, rgb(55, 232, 1), rgb(23, 74, 255));
+    transform: scale(1.03);
+}
+
+.project-card-hidden-project {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out, visibility 0.5s;
+}
+
+.project-card-hidden-project.show {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
 }

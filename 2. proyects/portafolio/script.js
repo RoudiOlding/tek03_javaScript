@@ -94,3 +94,19 @@ document.addEventListener("DOMContentLoaded", function () {
     updateText();
 });
 
+document.getElementById("toggle-projects").addEventListener("click", function() {
+    const hiddenProjects = document.querySelectorAll(".project-card-hidden-project");
+    const button = document.getElementById("toggle-projects");
+
+    let isHiding = button.textContent === "-";
+
+    hiddenProjects.forEach(project => {
+        if (isHiding) {
+            project.classList.remove("show");
+        } else {
+            project.classList.add("show");
+        }
+    });
+
+    button.textContent = isHiding ? "+" : "-";
+});
