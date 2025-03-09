@@ -127,3 +127,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateToggleButtonVisibility();
 });
+
+document.getElementById("submitButton").addEventListener("click", function() {
+    let email = document.getElementById("userEmail").value;
+    
+    if (email.trim() === "") {
+        alert("Por favor, ingresa tu correo antes de enviar.");
+    } else {
+        document.getElementById("contactForm").submit();
+    }
+});
