@@ -337,6 +337,7 @@ section {
 
 .project-card img, .project-card-hidden-project img {
     width: 15vw;
+    height: 12vw;
     border-radius: 1rem;
 }
 
@@ -717,4 +718,23 @@ a {
 .projects a {
     text-decoration: none;
     color: inherit;
+}
+
+.tech-stack {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.tech-stack p {
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Transición suave */
+}
+
+.tech-stack p:hover {
+    background: linear-gradient(to right, rgb(55, 232, 1), rgb(23, 74, 255)); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transform: scale(1.1);
+    cursor: pointer;
 }
