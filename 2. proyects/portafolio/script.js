@@ -94,19 +94,36 @@ document.addEventListener("DOMContentLoaded", function () {
     updateText();
 });
 
-document.getElementById("toggle-projects").addEventListener("click", function() {
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("toggle-projects");
     const hiddenProjects = document.querySelectorAll(".project-card-hidden-project");
-    const button = document.getElementById("toggle-projects");
 
-    let isHiding = button.textContent === "-";
-
-    hiddenProjects.forEach(project => {
-        if (isHiding) {
-            project.classList.remove("show");
+    function updateToggleButtonVisibility() {
+        if (hiddenProjects.length > 0) {
+            toggleButton.style.display = "block";
         } else {
-            project.classList.add("show");
+            toggleButton.style.display = "none";
+        }
+    }
+
+    toggleButton.addEventListener("click", function () {
+        let isHiding = toggleButton.textContent === "-";
+
+        hiddenProjects.forEach(project => {
+            if (isHiding) {
+                project.classList.remove("show");
+            } else {
+                project.classList.add("show");
+            }
+        });
+
+        toggleButton.textContent = isHiding ? "+" : "-";
+
+        if (isHiding) {
+            window.location.hash = "#skils";
+            window.location.hash = "#projects";
         }
     });
 
-    button.textContent = isHiding ? "+" : "-";
+    updateToggleButtonVisibility();
 });

@@ -675,7 +675,10 @@ a {
 }
 
 .toggle-container {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     margin-top: 20px;
 }
 
@@ -693,10 +696,6 @@ a {
     height: auto;
 }
 
-.toggle-container {
-    text-align: center;
-    margin-top: 20px;
-}
 
 #toggle-projects {
     padding: 0.8rem 1.5rem;
@@ -713,4 +712,9 @@ a {
 #toggle-projects:hover {
     background: linear-gradient(to right, rgb(55, 232, 1), rgb(23, 74, 255));
     transform: scale(1.03);
+}
+
+.projects a {
+    text-decoration: none;
+    color: inherit;
 }
