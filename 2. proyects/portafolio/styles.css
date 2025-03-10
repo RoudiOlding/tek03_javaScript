@@ -738,3 +738,55 @@ a {
     transform: scale(1.1);
     cursor: pointer;
 }
+
+.skills {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.skils-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    max-width: 900px;
+}
+
+.skils-card, .skils-card-hide {
+    width: 70vw;
+    min-height: 20vh;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.skils-icons-img, .skils-card-hide-img {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skils-icons-img img, .skils-card-hide-img img {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease-in-out;
+}
+
+.skils-icons-img img:hover, .skils-card-hide-img img:hover {
+    transform: scale(1.1);
+}
+
+.skils-card h2, .skils-card-hide h2 {
+    margin-bottom: 25px;
+}
