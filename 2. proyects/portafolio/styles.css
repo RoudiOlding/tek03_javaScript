@@ -767,7 +767,7 @@ a {
     text-align: center;
 }
 
-.skils-card:hover {
+.skils-card:hover, .skils-card-hide:hover {
     background-color: black;
     color: white;
 }
@@ -777,6 +777,10 @@ a {
     gap: 1.5rem;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.skils-card-hide .skils-icons-img img {
+    cursor: pointer;
 }
 
 .skils-icons-img img, .skils-card-hide-img img {
@@ -813,4 +817,9 @@ a {
 #toggle-skils:hover {
     background: linear-gradient(to right, rgb(55, 232, 1), rgb(23, 74, 255));
     transform: scale(1.03);
+}
+
+.skils-card-hide span {
+    margin-top: 10px;
+    font-style: italic;
 }
