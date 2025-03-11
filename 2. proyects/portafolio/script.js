@@ -1,4 +1,4 @@
-// Manejo del menú hamburguesa
+// Handle the header and the burger menu
 const menuIcon = document.querySelector('#menu-icon');
 const navLinks = document.querySelector('.nav-links');
 
@@ -6,7 +6,7 @@ menuIcon.onclick = () => {
     navLinks.classList.toggle('active');
 };
 
-// Descarga de CV
+// Download CV
 document.getElementById('download-cv').addEventListener('click', function() {
     const link = document.createElement('a');
     link.href = 'De Los Ríos.pdf';
@@ -16,7 +16,7 @@ document.getElementById('download-cv').addEventListener('click', function() {
     document.body.removeChild(link);
 });
 
-// Manejo de modales
+// Handle the modals
 function handleModals() {
     const modalTriggers = document.querySelectorAll('[data-modal-target]');
     const modals = document.querySelectorAll('.modal');
@@ -47,7 +47,7 @@ function handleModals() {
 
 handleModals();
 
-// Efecto de texto tipo máquina de escribir
+// Handle the type effect
 document.addEventListener("DOMContentLoaded", function () {
     const textElement = document.getElementById("typing-text");
     const typingContainer = document.getElementById("typing-container");
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateText();
 });
 
-// Manejo de proyectos ocultos
+// Handle the hiden projects
 document.addEventListener("DOMContentLoaded", function () {
     const toggleButton = document.getElementById("toggle-projects");
     const hiddenProjects = document.querySelectorAll(".project-card-hidden-project");
@@ -124,40 +124,29 @@ document.addEventListener("DOMContentLoaded", function () {
     updateToggleButtonVisibility();
 });
 
-// Validación del formulario de contacto
-document.getElementById("submitButton").addEventListener("click", function() {
-    let email = document.getElementById("userEmail").value.trim();
-
-    if (email === "") {
-        alert("Por favor, ingresa tu correo antes de enviar.");
-    } else {
-        document.getElementById("contactForm").submit();
-    }
-});
-
-// Manejo de skils ocultas
+// Handle the skils hidens
 document.addEventListener("DOMContentLoaded", function () {
-    const toggleButton = document.getElementById("toggle-projects");
-    const hiddenProjects = document.querySelectorAll(".project-card-hidden-project");
+    const toggleButton2 = document.getElementById("toggle-skils");
+    const hiddenSkils = document.querySelectorAll(".skils-card-hide");
 
-    function updateToggleButtonVisibility() {
-        toggleButton.style.display = hiddenProjects.length > 0 ? "block" : "none";
-    }
+    function toggleSkils() {
+        let isHiding = toggleButton2.textContent === "Ver menos";
 
-    toggleButton.addEventListener("click", function () {
-        let isHiding = toggleButton.textContent === "Ver menos";
-
-        hiddenProjects.forEach(project => {
-            project.classList.toggle("show", !isHiding);
+        hiddenSkils.forEach(skill => {
+            skill.style.display = isHiding ? "none" : "flex";
         });
 
-        toggleButton.textContent = isHiding ? "Ver más" : "Ver menos";
+        toggleButton2.textContent = isHiding ? "Ver más" : "Ver menos";
 
         if (isHiding) {
-            window.location.hash = "#experience";
             window.location.hash = "#projects";
+            window.location.hash = "#skills";
         }
+    }
+
+    hiddenSkils.forEach(skill => {
+        skill.style.display = "none";
     });
 
-    updateToggleButtonVisibility();
+    toggleButton2.addEventListener("click", toggleSkils);
 });
