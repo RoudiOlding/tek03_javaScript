@@ -1,10 +1,12 @@
+// Manejo del menú hamburguesa
 const menuIcon = document.querySelector('#menu-icon');
 const navLinks = document.querySelector('.nav-links');
 
 menuIcon.onclick = () => {
     navLinks.classList.toggle('active');
-}
+};
 
+// Descarga de CV
 document.getElementById('download-cv').addEventListener('click', function() {
     const link = document.createElement('a');
     link.href = 'De Los Ríos.pdf';
@@ -14,6 +16,7 @@ document.getElementById('download-cv').addEventListener('click', function() {
     document.body.removeChild(link);
 });
 
+// Manejo de modales
 function handleModals() {
     const modalTriggers = document.querySelectorAll('[data-modal-target]');
     const modals = document.querySelectorAll('.modal');
@@ -44,12 +47,12 @@ function handleModals() {
 
 handleModals();
 
+// Efecto de texto tipo máquina de escribir
 document.addEventListener("DOMContentLoaded", function () {
     const textElement = document.getElementById("typing-text");
-    const cursor = document.querySelector(".cursor");
     const typingContainer = document.getElementById("typing-container");
 
-    const textArray = ["Desarrollador Web", "Diseñador UX / UI", "Progamador Móvil"];
+    const textArray = ["Desarrollador Web", "Diseñador UX / UI", "Programador Móvil"];
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -94,33 +97,26 @@ document.addEventListener("DOMContentLoaded", function () {
     updateText();
 });
 
+// Manejo de proyectos ocultos
 document.addEventListener("DOMContentLoaded", function () {
     const toggleButton = document.getElementById("toggle-projects");
     const hiddenProjects = document.querySelectorAll(".project-card-hidden-project");
 
     function updateToggleButtonVisibility() {
-        if (hiddenProjects.length > 0) {
-            toggleButton.style.display = "block";
-        } else {
-            toggleButton.style.display = "none";
-        }
+        toggleButton.style.display = hiddenProjects.length > 0 ? "block" : "none";
     }
 
     toggleButton.addEventListener("click", function () {
-        let isHiding = toggleButton.textContent === "-";
+        let isHiding = toggleButton.textContent === "Ver menos";
 
         hiddenProjects.forEach(project => {
-            if (isHiding) {
-                project.classList.remove("show");
-            } else {
-                project.classList.add("show");
-            }
+            project.classList.toggle("show", !isHiding);
         });
 
-        toggleButton.textContent = isHiding ? "+" : "-";
+        toggleButton.textContent = isHiding ? "Ver más" : "Ver menos";
 
         if (isHiding) {
-            window.location.hash = "#skils";
+            window.location.hash = "#experience";
             window.location.hash = "#projects";
         }
     });
@@ -128,12 +124,40 @@ document.addEventListener("DOMContentLoaded", function () {
     updateToggleButtonVisibility();
 });
 
+// Validación del formulario de contacto
 document.getElementById("submitButton").addEventListener("click", function() {
-    let email = document.getElementById("userEmail").value;
-    
-    if (email.trim() === "") {
+    let email = document.getElementById("userEmail").value.trim();
+
+    if (email === "") {
         alert("Por favor, ingresa tu correo antes de enviar.");
     } else {
         document.getElementById("contactForm").submit();
     }
+});
+
+// Manejo de skils ocultas
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("toggle-projects");
+    const hiddenProjects = document.querySelectorAll(".project-card-hidden-project");
+
+    function updateToggleButtonVisibility() {
+        toggleButton.style.display = hiddenProjects.length > 0 ? "block" : "none";
+    }
+
+    toggleButton.addEventListener("click", function () {
+        let isHiding = toggleButton.textContent === "Ver menos";
+
+        hiddenProjects.forEach(project => {
+            project.classList.toggle("show", !isHiding);
+        });
+
+        toggleButton.textContent = isHiding ? "Ver más" : "Ver menos";
+
+        if (isHiding) {
+            window.location.hash = "#experience";
+            window.location.hash = "#projects";
+        }
+    });
+
+    updateToggleButtonVisibility();
 });
