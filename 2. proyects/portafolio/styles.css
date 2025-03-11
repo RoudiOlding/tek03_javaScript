@@ -862,3 +862,10 @@ a {
 .skils-card-hide:hover p{
     color: white;
 }
+
+.modal-content img {
+    max-width: 90%; /* La imagen no excede el 90% del ancho del modal */
+    width: 20vw; /* Se mantiene dentro de un tamaño relativo */
+    height: auto; /* Mantiene la proporción */
+    border-radius: 10px;
+}
