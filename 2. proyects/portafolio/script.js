@@ -150,3 +150,134 @@ document.addEventListener("DOMContentLoaded", function () {
 
     toggleButton2.addEventListener("click", toggleSkils);
 });
+
+// Animaciones
+document.addEventListener("DOMContentLoaded", function () {
+    const experienceCards = document.querySelectorAll(".experience-info .grid-card");
+    const experienceImage = document.querySelector(".experience-info img");
+    const experienceTitle = document.querySelector("#experience .section-title");
+
+    function showExperienceContent() {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        if (experienceTitle) {
+            const titleTop = experienceTitle.getBoundingClientRect().top;
+            if (titleTop < triggerBottom) {
+                setTimeout(() => {
+                    experienceTitle.classList.add("show");
+                }, 200);
+            }
+        }
+
+        experienceCards.forEach((card, index) => {
+            const cardTop = card.getBoundingClientRect().top;
+            if (cardTop < triggerBottom) {
+                setTimeout(() => {
+                    card.classList.add("show");
+                }, index * 300);
+            }
+        });
+
+        if (experienceImage) {
+            const imgTop = experienceImage.getBoundingClientRect().top;
+            if (imgTop < triggerBottom) {
+                setTimeout(() => {
+                    experienceImage.classList.add("show");
+                }, 400);
+            }
+        }
+    }
+
+    window.addEventListener("scroll", showExperienceContent);
+    showExperienceContent();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const projectsTitle = document.querySelector(".projects .section-title");
+    const projectCards = document.querySelectorAll(".project-card:nth-child(-n+3)");
+
+    function showProjects() {
+        const triggerBottom = window.innerHeight * 0.8;
+
+        if (projectsTitle) {
+            const titleTop = projectsTitle.getBoundingClientRect().top;
+            if (titleTop < triggerBottom) {
+                projectsTitle.classList.add("show");
+            }
+        }
+
+        projectCards.forEach((card, index) => {
+            const cardTop = card.getBoundingClientRect().top;
+            if (cardTop < triggerBottom) {
+                setTimeout(() => {
+                    card.classList.add("show");
+                }, index * 200);
+            }
+        });
+    }
+
+    window.addEventListener("scroll", showProjects);
+    showProjects();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const aboutSection = document.querySelector(".about-container");
+    const aboutImage = document.querySelector(".about .image-wrapper img");
+    const infoElements = [
+        document.querySelector(".info-box h3"),
+        document.querySelector(".info-box h1"),
+        document.querySelector(".info-box #typing-container"),
+        document.querySelector(".info-box .btn-group"),
+        document.querySelector(".socials")
+    ];
+
+    function showAboutSection() {
+        const triggerBottom = window.innerHeight * 0.8;
+
+        if (aboutSection) {
+            const sectionTop = aboutSection.getBoundingClientRect().top;
+            if (sectionTop < triggerBottom) {
+                aboutSection.classList.add("show");
+            }
+        }
+
+        if (aboutImage) {
+            const imgTop = aboutImage.getBoundingClientRect().top;
+            if (imgTop < triggerBottom) {
+                aboutImage.classList.add("show");
+            }
+        }
+
+        infoElements.forEach((element, index) => {
+            if (element) {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < triggerBottom) {
+                    setTimeout(() => {
+                        element.classList.add("show");
+                    }, index * 200);
+                }
+            }
+        });
+    }
+
+    window.addEventListener("scroll", showAboutSection);
+    showAboutSection();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const skillsTitle = document.querySelector(".skills .section-title");
+
+    function showSkillsTitle() {
+        const triggerBottom = window.innerHeight * 0.8;
+
+        if (skillsTitle) {
+            const titleTop = skillsTitle.getBoundingClientRect().top;
+            if (titleTop < triggerBottom) {
+                skillsTitle.classList.add("show");
+            }
+        }
+    }
+
+    window.addEventListener("scroll", showSkillsTitle);
+    showSkillsTitle();
+});
