@@ -16,12 +16,128 @@
             max-width: 500px;
             margin: 0 auto;
         }
+
+        h1 {
+            color: #fce300;
+            font-size: 12px;
+            font-weight: 600;
+        
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+
+            & img {
+                width: 16px;
+                height: auto;
+            }
+
+        }
+
+        canvas {
+            background: #fff;
+        }
+
+        header {
+            background: silver;
+            padding: 2px;
+        }
+
+        header button {
+            border: 0;
+            background: transparent;
+        }
+
+        header button:hover {
+            box-shadow:
+                1px 1px black,
+                inset -1px -1px gray,
+                inset 1px 1px white;
+        }
+
+        main { 
+            padding: 16px;
+        }
+
+        footer {
+            background: silver;
+            padding: 4px;
+        }
+
+        #container {
+            border: 1px solid #80808080;
+        }
     </style>
     <script type="module">
+        // CONSTANTS
+        const MODES = {
+            DRAW: 'draw',
+            ERASE: 'erase',
+            RECTANGLE: 'rectangle',
+            ELIPSE: 'elipse',
+            PICKER: 'picker'
+        }
 
+        // UTILITES
+        const $ = selector => document.querySelector(selector) // To collect an element
+        const $$ = selector => document.querySelectorAll(selector) // To collect a list of elements
+
+        // ELEMENTS
+        const $canvas = $('#canvas')
+        
+        const ctx = $canvas.getContext('2d')
+
+        // STATE
+        let isDrawing = false
+        let startX, startY
+        let lastX = 0
+        let lastY = 0
+        let mode = MODES.DRAW
+
+        // EVENTS
+        $canvas.addEventListener('mousedown', startDrawing)
+        $canvas.addEventListener('mousemove', draw)
+        $canvas.addEventListener('mouseup', stopDrawing)
+        $canvas.addEventListener('mouseleave', stopDrawing)
+
+        // METHODS
+        function startDrawing(event) {
+            isDrawing = true
+
+            const { offsetX, offsetY } = event
+        }
+
+        function draw(event) { }
+
+        function stopDrawing(event) { }
+            
     </script>
 </head>
 <body>
-    <h1>paint.js</h1>
+
+    <h1>
+        <img src="icon.png" alt="Paint.js">
+        Paint.js
+    </h1>
+
+
+    <div class="container">
+        <header>
+            <button>File</button>
+            <button>Edit</button>
+            <button>View</button>
+            <button>Image</button>
+            <button>Option</button>
+            <button>Help</button>
+        </header>
+    
+        <main>
+            <canvas id="canvas" width="300" height="200"></canvas>
+        </main>
+    
+        <footer>
+            <input type="color" id="color-picker" value="#000000" />
+        </footer>
+    </div>
 </body>
 </html>
