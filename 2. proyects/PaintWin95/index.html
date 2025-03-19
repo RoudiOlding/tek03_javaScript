@@ -67,6 +67,36 @@
         #container {
             border: 1px solid #80808080;
         }
+
+        aside {
+            background: silver;
+            width: 52px;
+            padding-top: 2px;
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+            }
+        }
+
+        aside button {
+            width: 24px;
+            height: 24px;
+
+            background: #bdbdbd url('./icons/draw.png') no-repeat center;
+
+            border: 1.5px solid #eee;
+            border-right-color: #000;
+            border-bottom-color: #000;
+
+            image-rendering: pixelated;
+
+            &.activate {
+                border-color: #000;
+                border-right-color: #eee;
+                border-bottom: #eee;
+            }
+        }
     </style>
     <script type="module">
         // CONSTANTS
@@ -160,6 +190,16 @@
             <button>Option</button>
             <button>Help</button>
         </header>
+
+        <aside>
+            <nav>
+                <button class="activate" id="draw-btn" title="Pincel"></button>
+                <button id="erase-btn" title="Borrar"></button>
+                <button id="rectangle-btn" title="Rectangulo"></button>
+                <button id="elipse-btn" title="Elipse"></button>
+                <button id="picker-btn" title="Captura Color"></button>
+            </nav>
+        </aside>
     
         <main>
             <canvas id="canvas" width="300" height="200"></canvas>
