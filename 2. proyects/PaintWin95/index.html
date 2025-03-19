@@ -200,42 +200,35 @@
 
             const { offsetX, offsetY } = event
 
-            switch (mode) {
-                case MODES.DRAW:
-                    // Start drawing
-                    ctx.beginPath()
 
-                    // Move the trace to the cordanates
-                    ctx.moveTo(lastX, lastY)
+            if(mode == MODES.DRAW || mode == MODES.ERASE) {
+                ctx.beginPath()
 
-                    // Draw a line between the last position and the current position
-                    ctx.lineTo(offsetX, offsetY)
+                // Move the trace to the cordanates
+                ctx.moveTo(lastX, lastY)
 
-                    ctx.stroke();
+                // Draw a line between the last position and the current position
+                ctx.lineTo(offsetX, offsetY)
 
-                    // Update the last position
-                    [lastX, lastY] = [offsetX, offsetY]
+                ctx.stroke();
 
-                    return
+                // Update the last position
+                [lastX, lastY] = [offsetX, offsetY]
 
-                case MODES.ERASE:
-                    return
-                case MODES.RECTANGLE:
+                return
+            }
+
+            if (mode == MODES.RECTANGLE) {
                 ctx.putImageData(imageData, 0, 0);
 
-                    const width = offsetX - startX
-                    const height = offsetY - startY
+                const width = offsetX - startX
+                const height = offsetY - startY
 
-                    ctx.beginPath()
-                    ctx.rect(startX, startY, width, height)
-                    ctx.stroke()
-                    return 
-                case MODES.ELIPSE:
-                    return
-                case MODES.PICKER:
-                    return
-                    
-            }
+                ctx.beginPath()
+                ctx.rect(startX, startY, width, height)
+                ctx.stroke()
+                return 
+            }                
         }
 
         function stopDrawing(event) { 
@@ -256,6 +249,9 @@
 
             $('button.active')?.classList.remove('active')
 
+            // Reset globalCompositeOperation to ensure proper drawing
+            ctx.globalCompositeOperation = 'source-over';
+
             switch (mode) {
                 case MODES.DRAW:
                     $drawBtn.classList.add('active')
@@ -264,12 +260,14 @@
                     break
                 case MODES.RECTANGLE:
                     $rectangleBtn.classList.add('active')
-                    canvas.styler.cursor = 'cell'
+                    canvas.style.cursor = 'cell' // Fixed typo (was "styler")
                     ctx.lineWidth = 2
                     break
                 case MODES.ERASE:
                     $eraseBtn.classList.add('active')
                     canvas.style.cursor = 'cell';
+                    ctx.globalCompositeOperation = 'destination-out'; // Set to erase mode
+                    ctx.lineWidth = 20
                     break
                 case MODES.ELIPSE:
                     $elipseBtn.classList.add('active')
