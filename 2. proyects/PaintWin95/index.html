@@ -105,11 +105,34 @@
             isDrawing = true
 
             const { offsetX, offsetY } = event
+
+            // save the start position
+            ;[startX, startY] = [offsetX, offsetY]
+            ;[lastX, lastY] = [offsetX, offsetY]
         }
 
-        function draw(event) { }
+        function draw(event) {
+            if(!isDrawing) return // If the user is not drawin, do nothing
 
-        function stopDrawing(event) { }
+            const { offsetX, offsetY } = event
+
+            // Start drawing
+            ctx.beginPath()
+
+            // Move the trace to the cordanates
+            ctx.moveTo(lastX, lastY)
+
+            // Draw a line between the last position and the current position
+            ctx.lineTo(offsetX, offsetY)
+            ctx.stroke()
+
+            // Update the last position
+            ;[lastX, lastY] = [offsetX, offsetY]
+        }
+
+        function stopDrawing(event) { 
+            isDrawing = false
+        }
             
     </script>
 </head>
