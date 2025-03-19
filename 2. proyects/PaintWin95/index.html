@@ -76,6 +76,8 @@
             nav {
                 display: flex;
                 flex-wrap: wrap;
+                gap: 1px;
+                justify-content: center;
             }
         }
 
@@ -96,6 +98,25 @@
                 border-right-color: #eee;
                 border-bottom: #eee;
             }
+        }
+
+        #draw-btn {
+            background-image: url('./icons/draw.png');
+        }
+        #erase-btn {
+            background-image: url('./icons/erase.png');
+        }
+        #rectangle-btn {
+            background-image: url('./icons/rectangle.png');
+        }
+        #elipse-btn {
+            background-image: url('./icons/ellipse.png');
+        }
+        #picker-btn {
+            background-image: url('./icons/picker.png');
+        }
+        #clear-btn {
+            background-image: url('./icons/clear.png ');
         }
     </style>
     <script type="module">
@@ -193,11 +214,12 @@
 
         <aside>
             <nav>
-                <button class="activate" id="draw-btn" title="Pincel"></button>
+                <button id="draw-btn" title="Pincel"></button>
                 <button id="erase-btn" title="Borrar"></button>
                 <button id="rectangle-btn" title="Rectangulo"></button>
                 <button id="elipse-btn" title="Elipse"></button>
                 <button id="picker-btn" title="Captura Color"></button>
+                <button id="clear-btn" title="Limpiar dibujo"></button>
             </nav>
         </aside>
     
