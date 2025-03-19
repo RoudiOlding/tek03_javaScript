@@ -84,6 +84,7 @@
 
         // ELEMENTS
         const $canvas = $('#canvas')
+        const $colorPicker = $('#color-picker')
         
         const ctx = $canvas.getContext('2d')
 
@@ -99,6 +100,8 @@
         $canvas.addEventListener('mousemove', draw)
         $canvas.addEventListener('mouseup', stopDrawing)
         $canvas.addEventListener('mouseleave', stopDrawing)
+
+        $colorPicker.addEventListener('change', handleChangeColor)
 
         // METHODS
         function startDrawing(event) {
@@ -134,6 +137,10 @@
             isDrawing = false
         }
             
+        function handleChangeColor(event) {
+            const { value } = $colorPicker
+            ctx.strokeStyle = value
+        }
     </script>
 </head>
 <body>
