@@ -102,7 +102,7 @@
 
             image-rendering: pixelated;
 
-            &.activate {
+            &.active {
                 border-color: #000;
                 border-right-color: #eee;
                 border-bottom: #eee;
@@ -148,6 +148,7 @@
         const $clearBtn = $('#clear-btn')
         const $drawBtn = $('#draw-btn')
         const $rectangleBtn = $('#rectangle-btn')
+        const $eraseBtn = $('#erase-btn')
         const ctx = $canvas.getContext('2d')
 
         // STATE
@@ -156,6 +157,7 @@
         let lastX = 0
         let lastY = 0
         let mode = MODES.DRAW
+        let imageData
 
         // EVENTS
         $canvas.addEventListener('mousedown', startDrawing)
@@ -165,6 +167,10 @@
 
         $colorPicker.addEventListener('change', handleChangeColor)
         $clearBtn.addEventListener('click', clearCanvas)
+
+        $eraseBtn.addEventListener('click', () => {
+            setMode(MODES.ERASE)
+        })
 
         $rectangleBtn.addEventListener('click', () => {
             setMode(MODES.RECTANGLE)
@@ -176,13 +182,17 @@
 
         // METHODS
         function startDrawing(event) {
-            isDrawing = true
+            isDrawing = true;
+    
+            const { offsetX, offsetY } = event;
 
-            const { offsetX, offsetY } = event
+            [startX, startY] = [offsetX, offsetY];
+            [lastX, lastY] = [offsetX, offsetY];
 
-            // save the start position
-            ;[startX, startY] = [offsetX, offsetY]
-            ;[lastX, lastY] = [offsetX, offsetY]
+            ctx.beginPath();
+            ctx.moveTo(offsetX, offsetY);  
+
+            imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         }
 
         function draw(event) {
@@ -190,18 +200,42 @@
 
             const { offsetX, offsetY } = event
 
-            // Start drawing
-            ctx.beginPath()
+            switch (mode) {
+                case MODES.DRAW:
+                    // Start drawing
+                    ctx.beginPath()
 
-            // Move the trace to the cordanates
-            ctx.moveTo(lastX, lastY)
+                    // Move the trace to the cordanates
+                    ctx.moveTo(lastX, lastY)
 
-            // Draw a line between the last position and the current position
-            ctx.lineTo(offsetX, offsetY)
-            ctx.stroke()
+                    // Draw a line between the last position and the current position
+                    ctx.lineTo(offsetX, offsetY)
 
-            // Update the last position
-            ;[lastX, lastY] = [offsetX, offsetY]
+                    ctx.stroke();
+
+                    // Update the last position
+                    [lastX, lastY] = [offsetX, offsetY]
+
+                    return
+
+                case MODES.ERASE:
+                    return
+                case MODES.RECTANGLE:
+                ctx.putImageData(imageData, 0, 0);
+
+                    const width = offsetX - startX
+                    const height = offsetY - startY
+
+                    ctx.beginPath()
+                    ctx.rect(startX, startY, width, height)
+                    ctx.stroke()
+                    return 
+                case MODES.ELIPSE:
+                    return
+                case MODES.PICKER:
+                    return
+                    
+            }
         }
 
         function stopDrawing(event) { 
@@ -216,6 +250,38 @@
         function clearCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
         }
+
+        function setMode(newMode) {
+            mode = newMode
+
+            $('button.active')?.classList.remove('active')
+
+            switch (mode) {
+                case MODES.DRAW:
+                    $drawBtn.classList.add('active')
+                    canvas.style.cursor = 'crosshair'
+                    ctx.lineWidth = 2
+                    break
+                case MODES.RECTANGLE:
+                    $rectangleBtn.classList.add('active')
+                    canvas.styler.cursor = 'cell'
+                    ctx.lineWidth = 2
+                    break
+                case MODES.ERASE:
+                    $eraseBtn.classList.add('active')
+                    canvas.style.cursor = 'cell';
+                    break
+                case MODES.ELIPSE:
+                    $elipseBtn.classList.add('active')
+                    break
+                case MODES.PICKER:
+                    $pickerBtn.classList.add('active')
+                    break
+            }
+        }
+
+        // INIT
+        setMode(MODES.DRAW)
     </script>
 </head>
 <body>
