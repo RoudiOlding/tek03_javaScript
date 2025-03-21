@@ -252,7 +252,8 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height)
         }
 
-        function setMode(newMode) {
+        async function setMode(newMode) {
+            let previousMode = mode
             mode = newMode
 
             $('button.active')?.classList.remove('active')
@@ -272,17 +273,26 @@
                     ctx.lineWidth = 2
                     break
                 case MODES.ERASE:
-                    $eraseBtn.classList.add('active')
-                    canvas.style.cursor = 'cell';
-                    ctx.globalCompositeOperation = 'destination-out'; // Set to erase mode
-                    ctx.lineWidth = 20
+                    $eraseBtn.classList.add('active') 
                     break
                 case MODES.ELIPSE:
                     $elipseBtn.classList.add('active')
                     break
                 case MODES.PICKER:
                     $pickerBtn.classList.add('active')
-                    break
+                    const eyeDropper = new window.EyeDropper()
+
+                    try {
+                        const result = await eyeDropper.open()
+                        const { sRGBHex } = result
+                        ctx.strokeStyle = sRGBHex
+                        $colorPicker.value = sRGBHex
+                        setMode(previousMode)
+                    } catch (e) {
+                        // errorr
+                    }
+
+                    return
             }
         }
 
@@ -292,7 +302,7 @@
         // Show Picker if browser has support
         if (typeof window.EyeDropper !== 'undefined') {
             $pickerBtn.style.display = 'block'
-        }
+        } 
     </script>
 </head>
 <body>
