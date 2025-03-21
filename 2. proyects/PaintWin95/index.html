@@ -123,6 +123,7 @@
         }
         #picker-btn {
             background-image: url('./icons/picker.png');
+            display: none;
         }
         #clear-btn {
             background-image: url('./icons/clear.png ');
@@ -150,6 +151,7 @@
         const $rectangleBtn = $('#rectangle-btn')
         const $eraseBtn = $('#erase-btn')
         const ctx = $canvas.getContext('2d')
+        const $pickerBtn = $('#picker-btn')
 
         // STATE
         let isDrawing = false
@@ -167,6 +169,12 @@
 
         $colorPicker.addEventListener('change', handleChangeColor)
         $clearBtn.addEventListener('click', clearCanvas)
+
+
+        $pickerBtn.addEventListener('click', () => {
+            setMode(MODES.PICKER)
+        })
+
 
         $eraseBtn.addEventListener('click', () => {
             setMode(MODES.ERASE)
@@ -280,6 +288,11 @@
 
         // INIT
         setMode(MODES.DRAW)
+
+        // Show Picker if browser has support
+        if (typeof window.EyeDropper !== 'undefined') {
+            $pickerBtn.style.display = 'block'
+        }
     </script>
 </head>
 <body>
