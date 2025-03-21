@@ -155,6 +155,7 @@
 
         // STATE
         let isDrawing = false
+        let isShiftPressed = false
         let startX, startY
         let lastX = 0
         let lastY = 0
@@ -170,6 +171,8 @@
         $colorPicker.addEventListener('change', handleChangeColor)
         $clearBtn.addEventListener('click', clearCanvas)
 
+        document.addEventListener('keydown', handleKeyDown)
+        document.addEventListener('keyup', handleKeyUp)
 
         $pickerBtn.addEventListener('click', () => {
             setMode(MODES.PICKER)
@@ -229,8 +232,18 @@
             if (mode == MODES.RECTANGLE) {
                 ctx.putImageData(imageData, 0, 0);
 
-                const width = offsetX - startX
-                const height = offsetY - startY
+                let width = offsetX - startX
+                let height = offsetY - startY
+
+                if (isShiftPressed) {
+                    const sideLenght = Math.min(
+                        Math.abs(width),
+                        Math.abs(height)
+                    )
+
+                    width = width > 0 ? sideLenght : -sideLenght
+                    height = height > 0 ? sideLenght : -sideLenght
+                }
 
                 ctx.beginPath()
                 ctx.rect(startX, startY, width, height)
@@ -295,6 +308,15 @@
                     return
             }
         }
+
+        function handleKeyDown({ key }){
+            isShiftPressed = key === 'Shift'
+        }
+
+        function handleKeyUp({ key }) {
+            if (key === 'Shift') isShiftPressed = false
+        }
+
 
         // INIT
         setMode(MODES.DRAW)
