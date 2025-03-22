@@ -6,4 +6,26 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 5rem;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+.fourBars {
+    display: flex;
+    flex-direction: row;
+    gap: 15rem;
+}
+
+.oneEle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    text-align: center;
+}
+
+.bar {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }
