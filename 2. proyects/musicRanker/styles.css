@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -14,6 +14,7 @@ body {
     overflow-y: hidden;
     gap: 5rem;
 }
+
 .fourBars {
     display: flex;
     flex-direction: row;
@@ -23,18 +24,48 @@ body {
 .oneEle {
     display: flex;
     flex-direction: column;
-    align-items: center;   
+    align-items: center;
     text-align: center;
 }
 
-.bar {
+.bar-container {
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bar {
+    width: 40px; /* Más ancha */
+    height: 150px;
+    background-color: #000; /* Negra */
+    position: relative;
+    border-radius: 10px;
+    overflow: visible; /* Para que el punto sobresalga */
+}
+
+.slider {
+    width: 30px; /* Más ancho */
+    height: 30px; /* Más alto */
+    background-color: #ff0000; /* Rojo */
+    position: absolute;
+    bottom: 50%; /* Inicia en el medio */
+    left: 50%;
+    transform: translate(-50%, 50%); /* Centrado */
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+    border: 2px solid #fff; /* Borde blanco */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Sombra */
+}
+
+.score {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 footer {
     display: flex;
     flex-direction: column;
-    align-items:flex-end;
+    align-items: flex-end;
 }

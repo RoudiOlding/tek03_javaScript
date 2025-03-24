@@ -8,59 +8,45 @@
 </head>
 <body>
     <header>
-        <h1>FINAL SCORE</h1>
+        <h1>FINAL SCORE: <span id="totalScore">0</span></h1>
     </header>
 
     <main>
         <aside class="fourBars">
             <div class="oneEle">
                 <h3>Escucha</h3>
-                <div class="bar">
-                    <div>
-                        <p>40</p>
-                        <p>20</p>
-                        <p>0</p>
+                <div class="bar-container">
+                    <div class="bar">
+                        <div class="slider" id="escuchaSlider"></div>
                     </div>
-                    <p>BARRA</p>
-                    <p>POINT</p>
+                    <p class="score" id="escuchaScore">20</p>
                 </div>
             </div>
             <div class="oneEle">
                 <h3>Gusto</h3>
-                <div class="bar">
-                    <div>
-                        <p>30</p>
-                        <p>15</p>
-                        <p>0</p>
+                <div class="bar-container">
+                    <div class="bar">
+                        <div class="slider" id="gustoSlider"></div>
                     </div>
-                    <p>BARRA</p>
-                    <p>POINT</p>
-
+                    <p class="score" id="gustoScore">15</p>
                 </div>
             </div>
             <div class="oneEle">
                 <h3>Aporte & Posición</h3>
-                <div class="bar">
-                    <div>
-                        <p>20</p>
-                        <p>10</p>
-                        <p>0</p>
+                <div class="bar-container">
+                    <div class="bar">
+                        <div class="slider" id="aporteSlider"></div>
                     </div>
-                    <p>BARRA</p>
-                    <p>POINT</p>
+                    <p class="score" id="aporteScore">10</p>
                 </div>
             </div>
             <div class="oneEle">
                 <h3>Bonus</h3>
-                <p>(Letra, significado, original)</p>
-                <div class="bar">
-                    <div>
-                        <p>20</p>
-                        <p>10</p>
-                        <p>0</p>
+                <div class="bar-container">
+                    <div class="bar">
+                        <div class="slider" id="bonusSlider"></div>
                     </div>
-                    <p>BARRA</p>
-                    <p>POINT</p>
+                    <p class="score" id="bonusScore">5</p>
                 </div>
             </div>
         </aside>
@@ -69,5 +55,7 @@
     <footer>
         <p>Roudi Olding — Evaluation System </p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
