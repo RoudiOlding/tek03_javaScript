@@ -35,27 +35,27 @@ body {
 }
 
 .bar {
-    width: 40px; /* Más ancha */
+    width: 70px;
     height: 150px;
-    background-color: #000; /* Negra */
+    background-color: #000;
     position: relative;
-    border-radius: 10px;
-    overflow: visible; /* Para que el punto sobresalga */
+    border-radius: 30px;
+    overflow: visible;
 }
 
 .slider {
-    width: 30px; /* Más ancho */
-    height: 30px; /* Más alto */
-    background-color: #ff0000; /* Rojo */
+    width: 50px;
+    height: 50px;
+    background-color: #ff0000;
     position: absolute;
-    bottom: 50%; /* Inicia en el medio */
+    bottom: 50%;
     left: 50%;
-    transform: translate(-50%, 50%); /* Centrado */
+    transform: translate(-50%, 50%);
     cursor: pointer;
     border-radius: 50%;
     z-index: 1;
-    border: 2px solid #fff; /* Borde blanco */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Sombra */
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .score {
